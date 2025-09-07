@@ -1,4 +1,4 @@
-import { LlmModel, OpenAI, Plugin, streamText, StreamTextResult, aiSdkStreamResultToOpenAIStream } from 'llm-hooks-sdk';
+import { LlmModel, OpenAI, Plugin, streamText, StreamTextResult, aiSdkStreamToOpenAI } from 'llm-hooks-sdk';
 import { XMLValidator } from "fast-xml-parser";
 
 const RooCode_ToolUse_Instruct = `\
@@ -548,6 +548,6 @@ export default {
       const corrected = await patched.text;
       return { ...(data as OpenAI.ChatCompletionResponse), text: corrected };
     }
-    return aiSdkStreamResultToOpenAIStream(model.modelId, patched);
+    return aiSdkStreamToOpenAI(model.modelId, patched);
   },
 } satisfies Plugin;

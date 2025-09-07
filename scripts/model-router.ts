@@ -1,11 +1,11 @@
 import { generateText, Plugin } from 'llm-hooks-sdk';
 
 const SYSTEM_INSTRUCT = `\
-你是一名意图分类器。  
-下面有多项模型特长描述，每项前面有数字编号：  
+你是一名意图分类器。
+下面有多项模型特长描述，每项前面有数字编号：
 <model-list>
 
-请根据输入的消息，选择最匹配的一项，只输出对应数字，不要解释。
+请根据输入的用户消息，选择最匹配的一项，只输出对应数字，不要解释。
 `;
 
 export default {
@@ -46,7 +46,7 @@ export default {
       system: injected_instruct,
       messages: [{
         role: 'user',
-        content: lastMessage.content,
+        content: lastMessage.content as string,
       }],
     });
     const selectedModelIndex = Number.parseInt(result.text);
