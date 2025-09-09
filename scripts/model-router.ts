@@ -1,4 +1,4 @@
-import { generateText, Plugin } from 'llm-hooks-sdk';
+import { generateText, type Plugin } from 'llm-hooks-sdk';
 
 const SYSTEM_INSTRUCT = `\
 你是一名意图分类器。

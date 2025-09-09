@@ -1,5 +1,6 @@
 {
+  "type": "module",
   "dependencies": {
-    "llm-hooks-sdk": "^1.1.5"
+    "llm-hooks-sdk": "^1.1.6"
   }
 }
