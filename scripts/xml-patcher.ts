@@ -461,20 +461,20 @@ I am going to read the file to get more information.
 function extractFirstToLastContent(input: string): string | null {
   const startTag = '<content>';
   const endTag = '</content>';
-  
+
   const firstStartIndex = input.indexOf(startTag);
   if (firstStartIndex === -1) {
     return null;
   }
-  
+
   const lastEndIndex = input.lastIndexOf(endTag);
   if (lastEndIndex === -1 || lastEndIndex <= firstStartIndex) {
     return null;
   }
-  
+
   const contentStart = firstStartIndex + startTag.length;
   const content = input.substring(contentStart, lastEndIndex);
-  
+
   return content;
 }
 
@@ -533,6 +533,7 @@ function xmlPatcher(raw: string, model: LlmModel): StreamTextResult<{}, string> 
 export default {
   async afterUpstreamResponse({
     data,
+    logger,
     model,
   }, isStream) {
     const modelMessage = isStream
@@ -542,6 +543,8 @@ export default {
 
     const isValid = validateRooCodeResponse(modelMessage);
     if (isValid) return null;
+
+    logger.info("Response not valid, try to patching...");
 
     const patched = xmlPatcher(modelMessage, model);
     if (!isStream) {
